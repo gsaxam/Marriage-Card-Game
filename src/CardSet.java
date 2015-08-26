@@ -1,4 +1,5 @@
 import javax.smartcardio.Card;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,14 @@ public class CardSet {
         this.suit = suit;
     }
 
+    public  Ranks rank(){
+        return rank;
+    }
+
+    public Suits suit(){
+        return suit;
+    }
+
     private static final List<CardSet> deck  = new ArrayList<CardSet>();
 
     static {
@@ -35,21 +44,21 @@ public class CardSet {
         return this.numOfDecks;
     }
 
-    public List<CardSet> getNewDeck(){
-        return new ArrayList<>(deck);
+    public ArrayList<CardSet> getNewDeck(){
+        return new ArrayList<CardSet>(deck);
     }
 
     public static void main (String [] args){
-        CardSet cards = new CardSet(null, null);
-        List<CardSet> hand = cards.getNewDeck();
-        int cursor = 0;
-        System.out.println(hand.size());
-        while (cursor < hand.size()) {
-            for (Object card : hand) {
-                System.out.println(hand.get(cursor).suit + "-" + hand.get(cursor).rank);
-                cursor ++;
-            }
-        }
+//        CardSet cards = new CardSet(null, null);
+//        List<CardSet> hand = cards.getNewDeck();
+//        int cursor = 0;
+//        System.out.println(hand.size());
+//        while (cursor < hand.size()) {
+//            for (Object card : hand) {
+//                System.out.println(hand.get(cursor).suit + "-" + hand.get(cursor).rank);
+//                cursor ++;
+//            }
+//        }
     }
 
 
