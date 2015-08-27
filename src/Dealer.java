@@ -1,16 +1,10 @@
-import com.sun.tools.javah.Util;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 /**
  * Created by saksham on 8/24/15.
@@ -74,14 +68,9 @@ public class Dealer {
 
         String dirPath = "resources/";
 
-        BufferedImage img = null;
-
-//        path = path + "SPADES-ACE.gif";
-//        File file = new File(path);
-
-        // define a panel that will go into main table panel
-        JPanel tableMat = new JPanel();
-
+        JLayeredPane tableMat = new JLayeredPane();
+        int z_position =0;
+        int x_offset = 15;
         for (CardSet card : playersHand) {
 
             String path = dirPath + card.suit().toString()+"-"+card.rank().toString()+".gif";
@@ -95,22 +84,17 @@ public class Dealer {
             } else {
                 BufferedImage icon = ImageIO.read(new File(file.getAbsolutePath()));
                 JLabel cardIcon = new JLabel(new ImageIcon(icon));
-//                cardIcon.setLocation(300,300);
-                tableMat.add(cardIcon);
+                cardIcon.setBounds(x_offset,20,300,300);
+                tableMat.add(cardIcon, new Integer(z_position));
+                z_position++;
+                x_offset += 15;
 
             }
 
         }
-
-//        System.out.println(cardIcon);
-
-        // define a main panel that will go into table frame
-        JPanel table = new JPanel(new BorderLayout());
-        table.add(tableMat, BorderLayout.WEST);
-
         // define a frame to hold all panels.
         JFrame tableFrame = new JFrame("Marriage MultiPlayer");
-        tableFrame.setContentPane(table);
+        tableFrame.setContentPane(tableMat);
         tableFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         tableFrame.setSize(800, 500);
         tableFrame.setVisible(true);
